@@ -1,5 +1,5 @@
 #!/usr/bin/python
-""" holds class Amenity"""
+"""To hold class Amenity"""
 import models
 from models.base_model import BaseModel, Base
 from os import getenv
@@ -17,5 +17,5 @@ class Amenity(BaseModel, Base):
         name = ""
 
     def __init__(self, *args, **kwargs):
-        """initializes Amenity"""
+        """To initialize Amenity"""
         super().__init__(*args, **kwargs)
