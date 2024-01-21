@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Contains the TestCityDocs classes
+To contain the TestCityDocs classes
 """
 
 from datetime import datetime
@@ -14,10 +14,10 @@ City = city.City
 
 
 class TestCityDocs(unittest.TestCase):
-    """Tests to check the documentation and style of City class"""
+    """To test and check the documentation and style of City class"""
     @classmethod
     def setUpClass(cls):
-        """Set up for the doc tests"""
+        """To set up the doc tests"""
         cls.city_f = inspect.getmembers(City, inspect.isfunction)
 
     def test_pep8_conformance_city(self):

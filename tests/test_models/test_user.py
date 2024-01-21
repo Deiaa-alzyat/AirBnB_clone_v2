@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Contains the TestUserDocs classes
+To contain the TestUserDocs classes
 """
 
 from datetime import datetime
@@ -14,10 +14,10 @@ User = user.User
 
 
 class TestUserDocs(unittest.TestCase):
-    """Tests to check the documentation and style of User class"""
+    """To test and check the documentation and style of User class"""
     @classmethod
     def setUpClass(cls):
-        """Set up for the doc tests"""
+        """To set up the doc tests"""
         cls.user_f = inspect.getmembers(User, inspect.isfunction)
 
     def test_pep8_conformance_user(self):

@@ -77,7 +77,7 @@ class BaseModel:
         if 'password' in new_dict and not is_fs_writing:
             del new_dict['password']
         return new_dict
-
+    
     def delete(self):
         """delete the current instance from the storage"""
         models.storage.delete(self)

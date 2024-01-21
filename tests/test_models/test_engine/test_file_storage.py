@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Contains the TestFileStorageDocs classes
+To contain the TestFileStorageDocs classes
 """
 
 from datetime import datetime
@@ -24,10 +24,10 @@ classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
 
 
 class TestFileStorageDocs(unittest.TestCase):
-    """Tests to check the documentation and style of FileStorage class"""
+    """To test and check the documentation and style of FileStorage class"""
     @classmethod
     def setUpClass(cls):
-        """Set up for the doc tests"""
+        """To set up the doc tests"""
         cls.fs_f = inspect.getmembers(FileStorage, inspect.isfunction)
 
     def test_pep8_conformance_file_storage(self):

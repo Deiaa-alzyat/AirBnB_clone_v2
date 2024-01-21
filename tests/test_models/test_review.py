@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Contains the TestReviewDocs classes
+To contain the TestReviewDocs classes
 """
 
 from datetime import datetime
@@ -14,10 +14,10 @@ Review = review.Review
 
 
 class TestReviewDocs(unittest.TestCase):
-    """Tests to check the documentation and style of Review class"""
+    """To test and check the documentation and style of Review class"""
     @classmethod
     def setUpClass(cls):
-        """Set up for the doc tests"""
+        """To set up the doc tests"""
         cls.review_f = inspect.getmembers(Review, inspect.isfunction)
 
     def test_pep8_conformance_review(self):

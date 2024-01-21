@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Contains the TestPlaceDocs classes
+To contain the TestPlaceDocs classes
 """
 
 from datetime import datetime
@@ -14,10 +14,10 @@ Place = place.Place
 
 
 class TestPlaceDocs(unittest.TestCase):
-    """Tests to check the documentation and style of Place class"""
+    """To test and check the documentation and style of Place class"""
     @classmethod
     def setUpClass(cls):
-        """Set up for the doc tests"""
+        """To set up the doc tests"""
         cls.place_f = inspect.getmembers(Place, inspect.isfunction)
 
     def test_pep8_conformance_place(self):

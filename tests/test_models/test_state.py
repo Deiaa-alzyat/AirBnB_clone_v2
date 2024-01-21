@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Contains the TestStateDocs classes
+To contain the TestStateDocs classes
 """
 
 from datetime import datetime
@@ -14,10 +14,10 @@ State = state.State
 
 
 class TestStateDocs(unittest.TestCase):
-    """Tests to check the documentation and style of State class"""
+    """To test and check the documentation and style of State class"""
     @classmethod
     def setUpClass(cls):
-        """Set up for the doc tests"""
+        """To set up the doc tests"""
         cls.state_f = inspect.getmembers(State, inspect.isfunction)
 
     def test_pep8_conformance_state(self):
