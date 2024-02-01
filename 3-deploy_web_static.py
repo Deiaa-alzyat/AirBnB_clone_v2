@@ -4,36 +4,27 @@
 
 import os
 from datetime import datetime
-from fabric.api import env, local, put, run, runs_once
+from invoke import run, task, puts, Responder
 
+env = {'host_string': '54.167.183.175,100.26.169.40'}
 
-env.hosts = ['54.167.183.175', '100.26.169.40']
-
-
-@runs_once
+@task
 def do_pack():
     """Archives the static files."""
     if not os.path.isdir("versions"):
         os.mkdir("versions")
     cur_time = datetime.now()
-    output = "versions/web_static_{}{}{}{}{}{}.tgz".format(
-        cur_time.year,
-        cur_time.month,
-        cur_time.day,
-        cur_time.hour,
-        cur_time.minute,
-        cur_time.second
-    )
+    output = f"versions/web_static_{cur_time.year}{cur_time.month}{cur_time.day}{cur_time.hour}{cur_time.minute}{cur_time.second}.tgz"
     try:
-        print("Packing web_static to {}".format(output))
-        local("tar -cvzf {} web_static".format(output))
+        puts(f"Packing web_static to {output}")
+        run(f"tar -cvzf {output} web_static")
         archize_size = os.stat(output).st_size
-        print("web_static packed: {} -> {} Bytes".format(output, archize_size))
+        puts(f"web_static packed: {output} -> {archize_size} Bytes")
     except Exception:
         output = None
     return output
 
-
+@task
 def do_deploy(archive_path):
     """Deploys the static files to the host servers.
     Args:
@@ -43,26 +34,26 @@ def do_deploy(archive_path):
         return False
     file_name = os.path.basename(archive_path)
     folder_name = file_name.replace(".tgz", "")
-    folder_path = "/data/web_static/releases/{}/".format(folder_name)
+    folder_path = f"/data/web_static/releases/{folder_name}/"
     success = False
     try:
-        put(archive_path, "/tmp/{}".format(file_name))
-        run("mkdir -p {}".format(folder_path))
-        run("tar -xzf /tmp/{} -C {}".format(file_name, folder_path))
-        run("rm -rf /tmp/{}".format(file_name))
-        run("mv {}web_static/* {}".format(folder_path, folder_path))
-        run("rm -rf {}web_static".format(folder_path))
+        put(archive_path, f"/tmp/{file_name}")
+        run(f"mkdir -p {folder_path}")
+        run(f"tar -xzf /tmp/{file_name} -C {folder_path}")
+        run(f"rm -rf /tmp/{file_name}")
+        run(f"mv {folder_path}web_static/* {folder_path}")
+        run(f"rm -rf {folder_path}web_static")
         run("rm -rf /data/web_static/current")
-        run("ln -s {} /data/web_static/current".format(folder_path))
-        print('New version is now LIVE!')
+        run(f"ln -s {folder_path} /data/web_static/current")
+        puts('New version is now LIVE!')
         success = True
     except Exception:
         success = False
     return success
 
-
+@task
 def deploy():
-    """Archives and deploys the static files to the host servers.
-    """
+    """Archives and deploys the static files to the host servers."""
     archive_path = do_pack()
     return do_deploy(archive_path) if archive_path else False
+
